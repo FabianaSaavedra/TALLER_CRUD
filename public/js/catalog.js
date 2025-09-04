@@ -1,15 +1,24 @@
 // Script base para la vista de catálogo
 // Aquí deben consumir la API de items y mostrarlos en la página
 
+import { getItems } from "./services/api";
+
 // Constante con la URL base de la API
 const API_URL = "/api/items";
 
 // TODO: Seleccionar el contenedor donde se mostrarán los items
 // const catalogContainer = document.getElementById("...");
+const catalogContainer = document.getElementById("catalogContainer");
 
 // Función principal para cargar los items desde la API
 async function loadCatalog() {
     try {
+        const items = await getItems();
+        console.log(items);
+        items.array.forEach(item => {
+            const card = renderItem(item);
+            catalogContainer.appendChild(card);
+        });
         // 1. Hacer fetch a la API (GET /api/items)
         // 2. Parsear la respuesta a JSON
         // 3. Limpiar el contenedor del catálogo

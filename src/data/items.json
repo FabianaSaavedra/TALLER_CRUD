@@ -1,12 +1,35 @@
 [
   {
-    "name": "Objeto 1",
-    "description": "Descripción 1",
-    "id": 1
-  },
-  {
     "name": "Objeto 2",
     "description": "Descripción 2",
-    "id": 2
+    "id": 2,
+    "category": "sala",
+    "stock": "1500",
+    "date": "03/09/2025",
+    "price": "450000"
+  },
+  {
+    "name": "Objeto 3",
+    "description": "Descripción 3",
+    "id": 3
+  },
+  {
+    "name": "Objeto 4",
+    "description": "Descripción 4",
+    "id": 4,
+    "category": "Categoría 55",
+    "stock": "255",
+    "date": "2025-09-11",
+    "price": "500000"
+  },
+  {
+    "image": "https://i.pinimg.com/736x/fb/42/d1/fb42d1a4b94e7c5981a8b5a31cca59e8.jpg",
+    "name": "galleta",
+    "description": "dulce",
+    "category": "5800",
+    "stock": "200",
+    "date": "2025-09-02",
+    "price": "2000",
+    "id": 1756906689588
   }
 ]
