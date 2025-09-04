@@ -5,6 +5,7 @@ export function renderItems(items, tableBody) {
         row.innerHTML = `
             <td>${item.id}</td>
             <td><img src="${item.image}" alt="${item.name}"></td>
+            
             <td>${item.name}</td>
             <td>${item.description || ""}</td>
             <td>${item.category || ""}</td>

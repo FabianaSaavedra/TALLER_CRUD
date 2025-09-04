@@ -14,12 +14,31 @@
         </ul>
     </nav>
 
-    <h1>Catálogo de Items</h1>
 
-    <div id="catalogContainer" class="catalog-grid">
-        <!-- Aquí se van a renderizar las tarjetas con los items -->
-    </div>
+    <h1>Catálogo de Productos</h1>
 
+    <!-- Estado vacío (se muestra si no hay productos) -->
+    <p id="emptyState" class="empty" hidden>
+      No hay productos aún. Agrega algunos desde “Gestión”.
+    </p>
+
+    <!-- Contenedor donde se renderizan las tarjetas -->
+    <section id="catalogContainer" class="catalog-grid" aria-live="polite"></section>
+
+    <!-- Plantilla de tarjeta para clonar desde JS -->
+    <template id="catalogCardTemplate">
+      <article class="card" data-id="">
+        <div class="card-img-wrap">
+          <img class="card-img" src="" alt="">
+        </div>
+        <div class="card-body">
+          <h3 class="card-title"></h3>
+          <p class="card-price"></p>
+          <p class="card-id"></p>
+        </div>
+      </article>
+    </template>
+  
     <script type="module" src="./js/catalog.js"></script>
 </body>
 </html>
