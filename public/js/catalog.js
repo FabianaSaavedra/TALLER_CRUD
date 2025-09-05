@@ -1,16 +1,52 @@
 // Script para la vista de catálogo
 import { getItems } from "./services/api.js";
 
-// Seleccionar el contenedor donde se mostrarán los items
 const catalogContainer = document.getElementById("catalogContainer");
-const emptyState = document.getElementById("emptyState"); // opcional si usas el <p id="emptyState">
+const emptyState = document.getElementById("emptyState");
 
-// Función principal para cargar los items desde la API
+// ---------- Modal ----------
+const modal = document.getElementById("itemModal");
+const closeModalBtn = document.getElementById("closeModal");
+const addToCartBtn = document.getElementById("addToCartBtn");
+
+let currentItem = null;
+
+function openModal(item) {
+  currentItem = item; // guardamos el producto actual
+
+  document.getElementById("modalImage").src = item.image;
+  document.getElementById("modalImage").alt = item.name;
+  document.getElementById("modalTitle").textContent = item.name;
+  document.getElementById("modalPrice").textContent = `Precio: $ ${item.price} COP`;
+  document.getElementById("modalId").textContent = `ID: ${item.id}`;
+  document.getElementById("modalDescription").textContent = `Descripción: ${item.description || "Sin descripción"}`;
+  document.getElementById("modalCategory").textContent = `Categoría: ${item.category || "Sin categoría"}`;
+
+  modal.classList.remove("hidden");
+}
+
+closeModalBtn.addEventListener("click", () => {
+  modal.classList.add("hidden");
+});
+
+modal.addEventListener("click", (e) => {
+  if (e.target === modal) {
+    modal.classList.add("hidden");
+  }
+});
+
+// Evento agregar al carrito
+addToCartBtn.addEventListener("click", () => {
+  if (currentItem) {
+    console.log("Producto agregado al carrito:", currentItem);
+    alert(`${currentItem.name} agregado al carrito 🛒`);
+  }
+});
+
+// ---------- Catálogo ----------
 async function loadCatalog() {
   try {
     const items = await getItems();
-
-    // Limpiar contenedor
     catalogContainer.innerHTML = "";
 
     if (!items.length) {
@@ -20,7 +56,6 @@ async function loadCatalog() {
       if (emptyState) emptyState.hidden = true;
     }
 
-    // Renderizar cada item
     items.forEach(item => {
       const card = renderItem(item);
       catalogContainer.appendChild(card);
@@ -31,22 +66,22 @@ async function loadCatalog() {
   }
 }
 
-// Función para renderizar un item en el catálogo
 function renderItem(item) {
-  // Usar el <template> definido en catalog.html
   const template = document.getElementById("catalogCardTemplate");
   const clone = template.content.cloneNode(true);
 
-  // Llenar datos
-  clone.querySelector(".card").dataset.id = item.id;
+  const card = clone.querySelector(".card");
+  card.dataset.id = item.id;
   clone.querySelector(".card-img").src = item.image;
   clone.querySelector(".card-img").alt = item.name;
   clone.querySelector(".card-title").textContent = item.name;
-  clone.querySelector(".card-price").textContent = `$${item.price}`;
+  clone.querySelector(".card-price").textContent = `$ ${item.price} COP`;
   clone.querySelector(".card-id").textContent = `ID: ${item.id}`;
+
+  card.addEventListener("click", () => openModal(item));
 
   return clone;
 }
 
-// Inicializar el catálogo cuando cargue la página
 loadCatalog();
+

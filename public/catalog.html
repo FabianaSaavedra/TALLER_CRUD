@@ -1,44 +1,65 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo</title>
-    <link rel="stylesheet" href="./css/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogo</title>
+  <link rel="stylesheet" href="./css/styles.css">
+  <!-- Font Awesome para el ícono -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <nav class="navbar">
-        <ul>
-            <li><a href="index.html">Gestión</a></li>
-            <li><a href="catalog.html">Catálogo</a></li>
-        </ul>
-    </nav>
+  <nav class="navbar">
+    <ul>
+      <li><a href="index.html">Gestión</a></li>
+      <li><a href="catalog.html">Catálogo</a></li>
+    </ul>
+  </nav>
 
+  <h1>Catálogo de Productos</h1>
 
-    <h1>Catálogo de Productos</h1>
+  <!-- Estado vacío -->
+  <p id="emptyState" class="empty" hidden>
+    No hay productos aún. Agrega algunos desde “Gestión”.
+  </p>
 
-    <!-- Estado vacío (se muestra si no hay productos) -->
-    <p id="emptyState" class="empty" hidden>
-      No hay productos aún. Agrega algunos desde “Gestión”.
-    </p>
+  <!-- Contenedor de tarjetas -->
+  <section id="catalogContainer" class="catalog-grid" aria-live="polite"></section>
 
-    <!-- Contenedor donde se renderizan las tarjetas -->
-    <section id="catalogContainer" class="catalog-grid" aria-live="polite"></section>
+  <!-- Plantilla de tarjeta -->
+  <template id="catalogCardTemplate">
+    <article class="card" data-id="">
+      <div class="card-img-wrap">
+        <img class="card-img" src="" alt="">
+      </div>
+      <div class="card-body">
+        <h3 class="card-title"></h3>
+        <p class="card-price"></p>
+        <p class="card-id"></p>
+      </div>
+    </article>
+  </template>
 
-    <!-- Plantilla de tarjeta para clonar desde JS -->
-    <template id="catalogCardTemplate">
-      <article class="card" data-id="">
-        <div class="card-img-wrap">
-          <img class="card-img" src="" alt="">
-        </div>
-        <div class="card-body">
-          <h3 class="card-title"></h3>
-          <p class="card-price"></p>
-          <p class="card-id"></p>
-        </div>
-      </article>
-    </template>
-  
-    <script type="module" src="./js/catalog.js"></script>
+  <!-- Modal -->
+  <div id="itemModal" class="modal hidden">
+    <div class="modal-content">
+      <span id="closeModal" class="close">&times;</span>
+      <img id="modalImage" src="" alt="" class="modal-img" />
+      <h2 id="modalTitle"></h2>
+      <p id="modalPrice"></p>
+      <p id="modalId"></p>
+      <p id="modalDescription"></p>
+      <p id="modalCategory"></p>
+
+      <!-- Botón agregar al carrito -->
+      <button id="addToCartBtn" class="cart-btn">
+        <i class="fa-solid fa-cart-plus"></i>
+      </button>
+    </div>
+  </div>
+
+  <script type="module" src="./js/catalog.js"></script>
 </body>
 </html>
+
+
